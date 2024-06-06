@@ -1,7 +1,7 @@
 package controller;
 
 import model.conexion;
-import view.ConsoleView;
+import view.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,4 +26,5 @@ public class ConexionController {
             }
         }
     }
+
 }

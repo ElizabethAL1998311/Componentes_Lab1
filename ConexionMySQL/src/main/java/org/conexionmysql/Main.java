@@ -1,6 +1,7 @@
 package org.conexionmysql;
 
 import controller.ClaseController;
+import controller.UsuarioController;
 import view.ConsoleView;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -14,9 +15,10 @@ public class Main {
         //ConexionController conexionController = new ConexionController(viewConsole);
         //conexionController.openConnection();
         ConsoleView consoleView = new ConsoleView();
-        ClaseController claseController = new ClaseController(consoleView);
-        String nombre = "Matematicas";
-        int estado = 1;
-        claseController.agregarCurso(nombre, estado);
+        UsuarioController usuarioController= new UsuarioController(consoleView);
+        String nombre = "Mario";
+        String identificacion ="12345";
+        String correo = "Mario@gamil.com";
+        usuarioController.agregarUsuario(nombre,identificacion,correo);
     }
 }
