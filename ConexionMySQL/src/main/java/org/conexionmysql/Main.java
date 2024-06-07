@@ -19,9 +19,7 @@ public class Main {
 
         //Crear Usuario
         UsuarioController usuarioController= new UsuarioController(consoleView);
-        String nombre = "Ali";
-        String identificacion ="12345";
-        String correo = "Ali@gamil.com";
+
         usuarioController.agregarUsuario(nombre,identificacion,correo);
 
         //Crear Estudiante
@@ -30,4 +28,5 @@ public class Main {
         String estado ="Activo";
         EstudianteController.agregarEstudiante(estudiante_id,estado);
     }
+
 }
