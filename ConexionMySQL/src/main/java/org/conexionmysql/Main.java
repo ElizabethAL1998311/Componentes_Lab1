@@ -103,9 +103,11 @@ public class Main {
 
         //Crear Usuario
         UsuarioController usuarioController= new UsuarioController(consoleView);
+
         String nombre = "Lucia";
         String identificacion ="4321";
         String correo = "Lucia@gmail.com";
+
         usuarioController.agregarUsuario(nombre,identificacion,correo);
         usuarioController.leerUsuario(identificacion);
 
@@ -113,6 +115,7 @@ public class Main {
         EstudianteController EstudianteController= new EstudianteController(consoleView);
         int estudiante_id = Integer.parseInt("1");
         String estado ="Activo";
+
         EstudianteController.agregarEstudiante(estudiante_id,estado);*/
 
 }
