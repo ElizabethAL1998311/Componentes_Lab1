@@ -1,6 +1,7 @@
 package org.conexionmysql;
 
 import controller.ClaseController;
+import controller.EstudianteController;
 import controller.UsuarioController;
 import view.ConsoleView;
 
@@ -15,11 +16,17 @@ public class Main {
         //ConexionController conexionController = new ConexionController(viewConsole);
         //conexionController.openConnection();
         ConsoleView consoleView = new ConsoleView();
+
+        //Crear Usuario
         UsuarioController usuarioController= new UsuarioController(consoleView);
-        String nombre = "Juan";
-        String identificacion ="12345";
-        String correo = "juan@gamil.com";
+
         usuarioController.agregarUsuario(nombre,identificacion,correo);
+
+        //Crear Estudiante
+        EstudianteController EstudianteController= new EstudianteController(consoleView);
+        int estudiante_id = Integer.parseInt("1");
+        String estado ="Activo";
+        EstudianteController.agregarEstudiante(estudiante_id,estado);
     }
 
 }

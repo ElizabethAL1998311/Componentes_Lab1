@@ -12,6 +12,13 @@ public class UsuarioModel {
         this.correo = correo;
     }
 
+    public UsuarioModel(int id, String nombre, String identificacion, String correo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.identificacion = identificacion;
+        this.correo = correo;
+    }
+
     public int getId() {
         return id;
     }
