@@ -29,4 +29,43 @@ public class UsuarioController {
             viewConsole.errorMessage("Error al insertar datos: " + e.getMessage());
         }
     }
+
+    public void leerUsuario(int usuario_id) {
+        try {
+            UsuarioModel usuario = usuarioDAO.obtenerUsuario(usuario_id);
+            if (usuario != null) {
+                viewConsole.showMessage("Información del usuario: " + usuario.toString());
+            } else {
+                viewConsole.showMessage("Usuario no encontrado.");
+            }
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al leer usuario: " + e.getMessage());
+        }
+    }
+
+   /* public void actualizarUsuario(String identificacion, String nuevoNombre, String nuevoCorreo) {
+        try {
+            int filasActualizadas = usuarioDAO.actualizarUsuario(identificacion, nuevoNombre, nuevoCorreo);
+            if (filasActualizadas > 0) {
+                viewConsole.showMessage("Usuario actualizado correctamente.");
+            } else {
+                viewConsole.showMessage("No se encontró ningún usuario para actualizar.");
+            }
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al actualizar usuario: " + e.getMessage());
+        }
+    }
+
+    public void eliminarUsuario(String identificacion) {
+        try {
+            int filasEliminadas = usuarioDAO.eliminarUsuario(identificacion);
+            if (filasEliminadas > 0) {
+                viewConsole.showMessage("Usuario eliminado correctamente.");
+            } else {
+                viewConsole.showMessage("No se encontró ningún usuario para eliminar.");
+            }
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al eliminar usuario: " + e.getMessage());
+        }
+    }*/
 }

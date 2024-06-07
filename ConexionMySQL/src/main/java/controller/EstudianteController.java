@@ -29,4 +29,17 @@ public class EstudianteController {
             viewConsole.errorMessage("Error al insertar datos: " + e.getMessage());
         }
     }
+
+    public void obtenerEstudiante(int estudiante_id) {
+        try {
+            EstudianteModel estudiante = estudianteDAO.obtenerEstudiante(estudiante_id);
+            if (estudiante != null) {
+                viewConsole.showMessage("Información del usuario: " + estudiante.toString());
+            } else {
+                viewConsole.showMessage("Usuario no encontrado.");
+            }
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al leer usuario: " + e.getMessage());
+        }
+    }
 }
