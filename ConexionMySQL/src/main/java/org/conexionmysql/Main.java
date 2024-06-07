@@ -16,9 +16,10 @@ public class Main {
         //conexionController.openConnection();
         ConsoleView consoleView = new ConsoleView();
         UsuarioController usuarioController= new UsuarioController(consoleView);
-        String nombre = "Mario";
+        String nombre = "Juan";
         String identificacion ="12345";
-        String correo = "Mario@gamil.com";
+        String correo = "juan@gamil.com";
         usuarioController.agregarUsuario(nombre,identificacion,correo);
     }
+
 }

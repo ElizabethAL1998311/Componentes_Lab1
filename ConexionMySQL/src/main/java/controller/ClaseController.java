@@ -19,7 +19,7 @@ public class ClaseController {
         this.claseDAO = new ClaseDAO(connection);
     }
 
-    public void agregarClase(String nombre, int estado){
+    public void agregarCurso(String nombre, int estado){
         ClaseModel datos = new ClaseModel(nombre, estado);
 
         try
