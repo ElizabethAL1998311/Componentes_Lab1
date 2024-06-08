@@ -8,7 +8,7 @@ public class ProfesorModel extends UsuarioModel{
         this.salario = salario;
     }
 
-    public ProfesorModel(int id, Double salario) {
+    public ProfesorModel(int id, double salario) {
         super(id, "", "", "");
         this.salario = salario;
     }
@@ -24,7 +24,11 @@ public class ProfesorModel extends UsuarioModel{
     @Override
     public String toString() {
         return "ProfesorModel{" +
-                "salario=" + salario +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", identificacion='" + getIdentificacion() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
+                ", salario=" + salario +
                 '}';
     }
 }

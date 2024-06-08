@@ -22,17 +22,32 @@ public class ProfesorDAO {
         }
     }
 
-    public EstudianteModel obtenerProfesor(int profesor_id) throws SQLException {
-        String query = "SELECT * FROM `profesor_AliEli` WHERE `profesor_id` = ?";
+    public ProfesorModel obtenerProfesor(int profesorId) throws SQLException {
+        String query = "SELECT p.profesor_id, p.salario, u.usuario_id, u.nombre, u.identificacion, u.correo " +
+                "FROM profesor_AliEli p " +
+                "JOIN usuario_AliEli u ON p.profesor_id = u.usuario_id " +
+                "WHERE p.profesor_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, profesor_id);
+            stmt.setInt(1, profesorId);
             try (ResultSet resultSet = stmt.executeQuery()) {
                 if (resultSet.next()) {
-                    String salario = String.valueOf(resultSet.getDouble("salario"));
-                    return new EstudianteModel(profesor_id,salario);
+                    int usuarioId = resultSet.getInt("usuario_id");
+                    String nombre = resultSet.getString("nombre");
+                    String identificacion = resultSet.getString("identificacion");
+                    String correo = resultSet.getString("correo");
+                    double salario = resultSet.getDouble("salario");
+                    return new ProfesorModel(usuarioId, nombre, identificacion, correo, salario);
                 }
             }
         }
         return null;
+    }
+
+    public void eliminarProfesorPorUsuario(int usuario_id) throws SQLException {
+        String query = "DELETE FROM profesor_AliEli WHERE profesor_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, usuario_id);
+            stmt.executeUpdate();
+        }
     }
 }
