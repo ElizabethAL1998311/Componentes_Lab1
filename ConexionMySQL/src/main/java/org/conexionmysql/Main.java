@@ -54,22 +54,22 @@ public class Main {
                     editarUsuario(usuarioController, scanner);
                     break;
                 case 8:
-                    /*editarEstudiante(estudianteController, scanner);*/
+                    editarEstudiante(estudianteController, scanner);
                     break;
                 case 9:
-                    /*editarProfesor(profesorController, scanner);*/
+                    editarProfesor(profesorController, scanner);
                     break;
                 case 10:
                     eliminarUsuario(usuarioController, scanner);
                     break;
                 case 11:
-                   /* eliminarEstudiante(estudianteController, scanner);*/
+                    eliminarEstudiante(estudianteController, scanner);
                     break;
                 case 12:
-                    /*eliminarProfesor(profesorController, scanner);*/
+                    eliminarProfesor(profesorController, scanner);
                     break;
                 case 13:
-                    continuar = false; // Salir del bucle y terminar el programa
+                    continuar = false;
                     break;
 
                 default:
@@ -152,12 +152,48 @@ public class Main {
         String correo = scanner.next();
         usuarioController.editarUsuario(usuario_id, nombre, identificacion, correo);
     }
+    public static void editarEstudiante(EstudianteController estudianteController, Scanner scanner) {
+        System.out.print("Ingrese el ID del estudiante que desea editar: ");
+        int estudiante_id = scanner.nextInt();
+        System.out.print("Ingrese el nuevo nombre: ");
+        String nombre = scanner.next();
+        System.out.print("Ingrese la nueva identificación: ");
+        String identificacion = scanner.next();
+        System.out.print("Ingrese el nuevo correo: ");
+        String correo = scanner.next();
+        System.out.print("Ingrese el nuevo estado: ");
+        String estado = scanner.next();
+        estudianteController.editarEstudiante(estudiante_id, nombre, identificacion, correo, estado);
+    }
+    public static void editarProfesor(ProfesorController profesorController, Scanner scanner) {
+        System.out.print("Ingrese el ID del profesor que desea editar: ");
+        int profesor_id  = scanner.nextInt();
+        System.out.print("Ingrese el nuevo nombre: ");
+        String nombre = scanner.next();
+        System.out.print("Ingrese la nueva identificación: ");
+        String identificacion = scanner.next();
+        System.out.print("Ingrese el nuevo correo: ");
+        String correo = scanner.next();
+        System.out.print("Ingrese el nuevo salario: ");
+        Double salario = Double.valueOf(scanner.next());
+        profesorController.editarEstudiante(profesor_id, nombre, identificacion, correo, salario);
+    }
+
 
     public static  void eliminarUsuario(UsuarioController usuarioController, Scanner scanner){
         System.out.println("Ingrese el ID del usuario a eliminar: ");
         int usuario_id = scanner.nextInt();
         usuarioController.eliminarUsuario(usuario_id);
     }
-
+    public static void eliminarEstudiante(EstudianteController estudianteController, Scanner scanner) {
+        System.out.println("Ingrese el ID del estudiante a eliminar: ");
+        int estudiante_id = scanner.nextInt();
+        estudianteController.eliminarEstudiante(estudiante_id);
+    }
+    public static void eliminarProfesor(ProfesorController profesorController, Scanner scanner) {
+        System.out.println("Ingrese el ID del profesor a eliminar: ");
+        int profesor_id = scanner.nextInt();
+        profesorController.eliminarProfesor(profesor_id);
+    }
 
 }

@@ -43,10 +43,26 @@ public class ProfesorDAO {
         return null;
     }
 
+    public void editarProfesor(int profesor_id, Double salario) throws SQLException {
+        String query = "UPDATE profesor_AliEli SET salario = ? WHERE profesor_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setDouble(1, salario);
+            stmt.setInt(2, profesor_id);
+            stmt.executeUpdate();
+        }
+    }
+
     public void eliminarProfesorPorUsuario(int usuario_id) throws SQLException {
         String query = "DELETE FROM profesor_AliEli WHERE profesor_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, usuario_id);
+            stmt.executeUpdate();
+        }
+    }
+    public void eliminarProfesor(int  profesor_id) throws SQLException {
+        String query = "DELETE FROM profesor_AliEli WHERE  profesor_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1,  profesor_id);
             stmt.executeUpdate();
         }
     }

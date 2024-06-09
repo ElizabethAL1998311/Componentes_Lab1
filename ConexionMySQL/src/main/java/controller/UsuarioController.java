@@ -12,12 +12,14 @@ public class UsuarioController {
 
     private UsuarioDAO usuarioDAO;
     private ProfesorDAO profesorDAO;
+    private EstudianteDAO estudianteDAO;
 
     public UsuarioController (ConsoleView viewConsole){
         this.viewConsole = viewConsole;
         Connection connection = conexion.getConnection();
         this.usuarioDAO = new UsuarioDAO(connection);
         this.profesorDAO = new ProfesorDAO(connection);
+        this.estudianteDAO = new EstudianteDAO(connection);
     }
 
 
@@ -56,10 +58,26 @@ public class UsuarioController {
         }
     }
 
+    /*public void eliminarUsuario(int usuario_id) {
+        try {
+            // Antes de eliminar al usuario, eliminamos al profesor correspondiente (si existe)
+            profesorDAO.eliminarProfesorPorUsuario(usuario_id);
+
+            // Luego, eliminamos al usuario
+            usuarioDAO.eliminarUsuario(usuario_id);
+
+            viewConsole.showMessage("Usuario eliminado correctamente");
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al eliminar usuario: " + e.getMessage());
+        }
+    }*/
     public void eliminarUsuario(int usuario_id) {
         try {
             // Antes de eliminar al usuario, eliminamos al profesor correspondiente (si existe)
             profesorDAO.eliminarProfesorPorUsuario(usuario_id);
+
+            // Antes de eliminar al usuario, eliminamos al estudiante correspondiente (si existe)
+            estudianteDAO.eliminarEstudiantePorUsuario(usuario_id);
 
             // Luego, eliminamos al usuario
             usuarioDAO.eliminarUsuario(usuario_id);

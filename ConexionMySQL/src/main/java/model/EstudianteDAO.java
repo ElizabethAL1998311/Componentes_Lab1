@@ -41,5 +41,30 @@ public class EstudianteDAO {
         }
         return null;
     }
+    public void editarEstudiante(int estudiante_id, String estado) throws SQLException {
+        String query = "UPDATE estudiante_AliEli SET estado = ? WHERE estudiante_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, estado);
+            stmt.setInt(2, estudiante_id);
+            stmt.executeUpdate();
+        }
+    }
+
+
+    public void eliminarEstudiantePorUsuario(int usuario_id) throws SQLException {
+        String query = "DELETE FROM estudiante_AliEli WHERE estudiante_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, usuario_id);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void eliminarEstudiante(int  estudiante_id) throws SQLException {
+        String query = "DELETE FROM estudiante_AliEli WHERE  estudiante_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1,  estudiante_id);
+            stmt.executeUpdate();
+        }
+    }
 
 }
