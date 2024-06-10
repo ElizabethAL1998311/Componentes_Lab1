@@ -5,98 +5,159 @@ import controller.EstudianteController;
 import controller.ProfesorController;
 import controller.UsuarioController;
 import view.ConsoleView;
-
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         ConsoleView viewConsole = new ConsoleView();
-
         Scanner scanner = new Scanner(System.in);
-
         // Crear instancias de los controladores necesarios
         UsuarioController usuarioController = new UsuarioController(viewConsole);
         EstudianteController estudianteController = new EstudianteController(viewConsole);
         ProfesorController profesorController = new ProfesorController(viewConsole);
+        mostrarMenu(scanner, usuarioController, estudianteController, profesorController);
+        // Cerrar el Scanner después de usarlo
+        scanner.close();
+    }
 
+    public static void mostrarMenu(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
         boolean continuar = true;
-
         while (continuar) {
+            System.out.println("_________MENU PRINCIPAL_________:");
+            System.out.println("1. Menú estudiante");
+            System.out.println("2. Menú profesor");
+            System.out.println("3. Menú usuario");
+            System.out.println("0. Salir");
+            System.out.print("Ingrese el número de opción: ");
 
-            mostrarMenu();
-
-            ConsoleView consoleView = new ConsoleView();
             // Leer la opción del usuario
             int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    menuEstudiante(scanner, usuarioController, estudianteController, profesorController);
+                    break;
+                case 2:
+                    menuProfesor(scanner, usuarioController, estudianteController, profesorController);
+                    break;
+                case 3:
+                    menuUsuario(scanner, usuarioController, estudianteController, profesorController);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    System.out.print("Opción no válida");
+            }
+        }
+    }
 
+    public static void menuProfesor(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+        ConsoleView consoleView = new ConsoleView();
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("_________Menú de P R O F E S O R:");
+            System.out.println("1. Agregar profesor");
+            System.out.println("2. Leer profesor");
+            System.out.println("3. Actualizar profesor");
+            System.out.println("4. Eliminar profesor");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            // Leer la opción del usuario
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    agregarProfesor(profesorController, scanner);
+                    break;
+                case 2:
+                    obtenerProfesor(profesorController, scanner);
+                    break;
+                case 3:
+                    editarProfesor(profesorController, scanner);
+                    break;
+                case 4:
+                    eliminarProfesor(profesorController, scanner);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    consoleView.showMessage("Opción no válida");
+            }
+        }
+    }
+
+    public static void menuEstudiante(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+        ConsoleView consoleView = new ConsoleView();
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("__________Menú de E S T U D I A N T E:");
+            System.out.println("1. Agregar estudiante");
+            System.out.println("2. Leer estudiante");
+            System.out.println("3. Actualizar estudiante");
+            System.out.println("4. Eliminar estudiante");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            // Leer la opción del usuario
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    agregarEstudiante(estudianteController, scanner);
+                    break;
+                case 2:
+                    obtenerEstudiante(estudianteController, scanner);
+                    break;
+                case 3:
+                    editarEstudiante(estudianteController, scanner);
+                    break;
+                case 4:
+                    eliminarEstudiante(estudianteController, scanner);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    consoleView.showMessage("Opción no válida");
+            }
+        }
+    }
+
+    public static void menuUsuario(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+        ConsoleView consoleView = new ConsoleView();
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("__________Menú de U S U A R I O:");
+            System.out.println("1. Agregar usuario");
+            System.out.println("2. Leer usuario");
+            System.out.println("3. Actualizar usuario");
+            System.out.println("4. Eliminar usuario");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            // Leer la opción del usuario
+            int opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
                     agregarUsuario(usuarioController, scanner);
                     break;
                 case 2:
-                    agregarEstudiante(estudianteController, scanner);
-                    break;
-                case 3:
-                    agregarProfesor(profesorController, scanner);
-                    break;
-                case 4:
                     leerUsuario(usuarioController, scanner);
                     break;
-                case 5:
-                   obtenerEstudiante(estudianteController, scanner);
-                    break;
-                case 6:
-                    obtenerProfesor(profesorController, scanner);
-                    break;
-                case 7:
+                case 3:
                     editarUsuario(usuarioController, scanner);
                     break;
-                case 8:
-                    editarEstudiante(estudianteController, scanner);
-                    break;
-                case 9:
-                    editarProfesor(profesorController, scanner);
-                    break;
-                case 10:
+                case 4:
                     eliminarUsuario(usuarioController, scanner);
                     break;
-                case 11:
-                    eliminarEstudiante(estudianteController, scanner);
-                    break;
-                case 12:
-                    eliminarProfesor(profesorController, scanner);
-                    break;
-                case 13:
+                case 0:
                     continuar = false;
+                    mostrarMenu(scanner, usuarioController, estudianteController, profesorController);
                     break;
-
                 default:
                     consoleView.showMessage("Opción no válida");
             }
         }
-
-        // Cerrar el Scanner después de usarlo
-        scanner.close();
-    }
-    public static void mostrarMenu() {
-        System.out.println("Menú de opciones:");
-        System.out.println("1. Agregar usuario");
-        System.out.println("2. Agregar estudiante");
-        System.out.println("3. Agregar profesor");
-        System.out.println("4. Leer usuario");
-        System.out.println("5. Leer estudiante");
-        System.out.println("6. Leer profesor");
-        System.out.println("7. Actualizar usuario");
-        System.out.println("8. Actualizar estudiante");
-        System.out.println("9. Actualizar profesor");
-        System.out.println("10. Eliminar usuario");
-        System.out.println("11. Eliminar estudiante");
-        System.out.println("12. Eliminar profesor");
-        System.out.println("13. Salir");
-
-        System.out.print("Ingrese el número de opción: ");
     }
 
     public static void agregarUsuario(UsuarioController usuarioController, Scanner scanner) {
@@ -116,6 +177,7 @@ public class Main {
         String estado = scanner.next();
         estudianteController.agregarEstudiante(estudiante_id, estado);
     }
+
     public static void agregarProfesor(ProfesorController profesorController, Scanner scanner) {
         System.out.print("Ingrese el ID del profesor: ");
         int profesor_id = scanner.nextInt();
@@ -135,6 +197,7 @@ public class Main {
         int estudiante_id = scanner.nextInt();
         estudianteController.obtenerEstudiante(estudiante_id);
     }
+
     public static void obtenerProfesor(ProfesorController profesorController, Scanner scanner) {
         System.out.print("Ingrese el ID del profesor que desea leer: ");
         int profesor_id = scanner.nextInt();
@@ -152,6 +215,7 @@ public class Main {
         String correo = scanner.next();
         usuarioController.editarUsuario(usuario_id, nombre, identificacion, correo);
     }
+
     public static void editarEstudiante(EstudianteController estudianteController, Scanner scanner) {
         System.out.print("Ingrese el ID del estudiante que desea editar: ");
         int estudiante_id = scanner.nextInt();
@@ -165,6 +229,7 @@ public class Main {
         String estado = scanner.next();
         estudianteController.editarEstudiante(estudiante_id, nombre, identificacion, correo, estado);
     }
+
     public static void editarProfesor(ProfesorController profesorController, Scanner scanner) {
         System.out.print("Ingrese el ID del profesor que desea editar: ");
         int profesor_id  = scanner.nextInt();
@@ -176,24 +241,24 @@ public class Main {
         String correo = scanner.next();
         System.out.print("Ingrese el nuevo salario: ");
         Double salario = Double.valueOf(scanner.next());
-        profesorController.editarEstudiante(profesor_id, nombre, identificacion, correo, salario);
+        profesorController.editarProfesor(profesor_id, nombre, identificacion, correo, salario);
     }
 
-
-    public static  void eliminarUsuario(UsuarioController usuarioController, Scanner scanner){
-        System.out.println("Ingrese el ID del usuario a eliminar: ");
+    public static void eliminarUsuario(UsuarioController usuarioController, Scanner scanner) {
+        System.out.print("Ingrese el ID del usuario a eliminar: ");
         int usuario_id = scanner.nextInt();
         usuarioController.eliminarUsuario(usuario_id);
     }
+
     public static void eliminarEstudiante(EstudianteController estudianteController, Scanner scanner) {
-        System.out.println("Ingrese el ID del estudiante a eliminar: ");
+        System.out.print("Ingrese el ID del estudiante a eliminar: ");
         int estudiante_id = scanner.nextInt();
         estudianteController.eliminarEstudiante(estudiante_id);
     }
+
     public static void eliminarProfesor(ProfesorController profesorController, Scanner scanner) {
-        System.out.println("Ingrese el ID del profesor a eliminar: ");
+        System.out.print("Ingrese el ID del profesor a eliminar: ");
         int profesor_id = scanner.nextInt();
         profesorController.eliminarProfesor(profesor_id);
     }
-
 }

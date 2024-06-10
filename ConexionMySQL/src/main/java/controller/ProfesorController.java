@@ -44,7 +44,7 @@ public class ProfesorController {
             viewConsole.errorMessage("Error al leer usuario: " + e.getMessage());
         }
     }
-    public void editarEstudiante(int profesor_id , String nombre, String identificacion, String correo, Double salario) {
+    public void editarProfesor(int profesor_id , String nombre, String identificacion, String correo, Double salario) {
         UsuarioModel datosUsuario = new UsuarioModel(profesor_id , nombre, identificacion, correo);
         try {
             // Actualizar la información del usuario
