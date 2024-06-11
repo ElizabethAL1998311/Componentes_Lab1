@@ -11,7 +11,6 @@ public class EstudianteDAO {
     public EstudianteDAO(Connection connection){
         this.connection = connection;
     }
-
     public void agregarEstudiante(EstudianteModel estudiante) throws SQLException {
         String query = "INSERT INTO estudiante_AliEli (estudiante_id, estado) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -41,6 +40,8 @@ public class EstudianteDAO {
         }
         return null;
     }
+
+
     public void editarEstudiante(int estudiante_id, String estado) throws SQLException {
         String query = "UPDATE estudiante_AliEli SET estado = ? WHERE estudiante_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -66,5 +67,6 @@ public class EstudianteDAO {
             stmt.executeUpdate();
         }
     }
+
 
 }

@@ -1,32 +1,36 @@
 package org.conexionmysql;
 
-import controller.ClaseController;
-import controller.EstudianteController;
-import controller.ProfesorController;
-import controller.UsuarioController;
+import controller.*;
 import view.ConsoleView;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args, ClaseController claseController) {
         ConsoleView viewConsole = new ConsoleView();
         Scanner scanner = new Scanner(System.in);
         // Crear instancias de los controladores necesarios
         UsuarioController usuarioController = new UsuarioController(viewConsole);
         EstudianteController estudianteController = new EstudianteController(viewConsole);
         ProfesorController profesorController = new ProfesorController(viewConsole);
-        mostrarMenu(scanner, usuarioController, estudianteController, profesorController);
+        ClaseController laseController = new ClaseController(viewConsole);
+        InscripcionController inscripcionController = new InscripcionController(viewConsole);
+        mostrarMenu(scanner,inscripcionController, usuarioController, estudianteController, profesorController, claseController);
         // Cerrar el Scanner después de usarlo
         scanner.close();
     }
 
-    public static void mostrarMenu(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+    public static void mostrarMenu(Scanner scanner, InscripcionController inscripcionController, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
         boolean continuar = true;
         while (continuar) {
             System.out.println("_________MENU PRINCIPAL_________:");
             System.out.println("1. Menú estudiante");
             System.out.println("2. Menú profesor");
             System.out.println("3. Menú usuario");
+            System.out.println("3. Menú clase");
+            System.out.println("3. Menú inscripcion");
             System.out.println("0. Salir");
             System.out.print("Ingrese el número de opción: ");
 
@@ -40,7 +44,13 @@ public class Main {
                     menuProfesor(scanner, usuarioController, estudianteController, profesorController);
                     break;
                 case 3:
-                    menuUsuario(scanner, usuarioController, estudianteController, profesorController);
+                    menuUsuario(scanner,inscripcionController, usuarioController, estudianteController, profesorController, ClaseController);
+                    break;
+                case 4:
+                    menuClase(ClaseController, scanner);
+                    break;
+                case 5:
+                    menuInscripciones(inscripcionController, scanner);
                     break;
                 case 0:
                     continuar = false;
@@ -49,6 +59,154 @@ public class Main {
                     System.out.print("Opción no válida");
             }
         }
+    }
+
+    public static void menuClase(ClaseController claseController, Scanner scanner) {
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("__________Menú de C L A S E S:");
+            System.out.println("1. Agregar clase");
+            System.out.println("2. Leer clase");
+            System.out.println("3. Actualizar clase");
+            System.out.println("4. Eliminar clase");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    agregarClase(claseController, scanner);
+                    break;
+                case 2:
+                    leerClase(claseController, scanner);
+                    break;
+                case 3:
+                    editarClase(claseController, scanner);
+                    break;
+                case 4:
+                    eliminarClase(claseController, scanner);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+            }
+        }
+    }
+
+    private static void agregarClase(ClaseController claseController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la clase: ");
+        int claseId = scanner.nextInt();
+        System.out.print("Ingrese el ID del curso: ");
+        int cursoId = scanner.nextInt();
+        System.out.print("Ingrese el ID del profesor: ");
+        int profesorId = scanner.nextInt();
+        System.out.print("Ingrese la fecha de la clase (yyyy-mm-dd): ");
+        Date fechaClase = Date.valueOf(scanner.next());
+        System.out.print("Ingrese la hora de inicio (hh:mm:ss): ");
+        Time horaInicio = Time.valueOf(scanner.next());
+        System.out.print("Ingrese la hora de fin (hh:mm:ss): ");
+        Time horaFin = Time.valueOf(scanner.next());
+        claseController.agregarClase(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+    }
+
+    private static void leerClase(ClaseController claseController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la clase: ");
+        int claseId = scanner.nextInt();
+        claseController.obtenerClase(claseId);
+    }
+
+    private static void editarClase(ClaseController claseController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la clase a editar: ");
+        int claseId = scanner.nextInt();
+        System.out.print("Ingrese el nuevo ID del curso: ");
+        int cursoId = scanner.nextInt();
+        System.out.print("Ingrese el nuevo ID del profesor: ");
+        int profesorId = scanner.nextInt();
+        System.out.print("Ingrese la nueva fecha de la clase (yyyy-mm-dd): ");
+        Date fechaClase = Date.valueOf(scanner.next());
+        System.out.print("Ingrese la nueva hora de inicio (hh:mm:ss): ");
+        Time horaInicio = Time.valueOf(scanner.next());
+        System.out.print("Ingrese la nueva hora de fin (hh:mm:ss): ");
+        Time horaFin = Time.valueOf(scanner.next());
+        claseController.editarClase(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+    }
+
+    private static void eliminarClase(ClaseController claseController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la clase a eliminar: ");
+        int claseId = scanner.nextInt();
+        claseController.eliminarClase(claseId);
+    }
+
+
+
+    public static void menuInscripciones(InscripcionController inscripcionController, Scanner scanner) {
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("__________Menú de I N S C R I P C I O N E S:");
+            System.out.println("1. Agregar inscripción");
+            System.out.println("2. Leer inscripción");
+            System.out.println("3. Actualizar inscripción");
+            System.out.println("4. Eliminar inscripción");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    agregarInscripcion(inscripcionController, scanner);
+                    break;
+                case 2:
+                    leerInscripcion(inscripcionController, scanner);
+                    break;
+                case 3:
+                    editarInscripcion(inscripcionController, scanner);
+                    break;
+                case 4:
+                    eliminarInscripcion(inscripcionController, scanner);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+            }
+        }
+    }
+
+    private static void editarInscripcion(InscripcionController inscripcionController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la inscripción: ");
+        int id = scanner.nextInt();
+        System.out.print("Ingrese el nuevo ID del estudiante: ");
+        int estudianteId = scanner.nextInt();
+        System.out.print("Ingrese el nuevo ID del profesor: ");
+        int profesorId = scanner.nextInt();
+        System.out.print("Ingrese el nuevo ID de la clase: ");
+        int claseId = scanner.nextInt();
+        inscripcionController.editarInscripcion(id, estudianteId, profesorId, claseId);
+    }
+
+    private static void eliminarInscripcion(InscripcionController inscripcionController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la inscripción: ");
+        int id = scanner.nextInt();
+        inscripcionController.eliminarInscripcion(id);
+    }
+
+    private static void leerInscripcion(InscripcionController inscripcionController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la inscripción: ");
+        int id = scanner.nextInt();
+        inscripcionController.leerInscripcion(id);
+    }
+
+    private static void agregarInscripcion(InscripcionController inscripcionController, Scanner scanner) {
+        System.out.print("Ingrese el ID del estudiante: ");
+        int estudianteId = scanner.nextInt();
+        System.out.print("Ingrese el ID del profesor: ");
+        int profesorId = scanner.nextInt();
+        System.out.print("Ingrese el ID de la clase: ");
+        int claseId = scanner.nextInt();
+        inscripcionController.agregarInscripcion(estudianteId, profesorId, claseId);
     }
 
     public static void menuProfesor(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
@@ -123,7 +281,7 @@ public class Main {
         }
     }
 
-    public static void menuUsuario(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+    public static void menuUsuario(Scanner scanner, InscripcionController inscripcionController, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
         ConsoleView consoleView = new ConsoleView();
         boolean continuar = true;
         while (continuar) {
@@ -152,7 +310,7 @@ public class Main {
                     break;
                 case 0:
                     continuar = false;
-                    mostrarMenu(scanner, usuarioController, estudianteController, profesorController);
+                    mostrarMenu(scanner, inscripcionController, usuarioController, estudianteController, profesorController, ClaseController);
                     break;
                 default:
                     consoleView.showMessage("Opción no válida");
