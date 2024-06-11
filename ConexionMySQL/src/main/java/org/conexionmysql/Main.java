@@ -8,14 +8,14 @@ import java.sql.Time;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args, ClaseController claseController) {
+    public static void main(String[] args) {
         ConsoleView viewConsole = new ConsoleView();
         Scanner scanner = new Scanner(System.in);
         // Crear instancias de los controladores necesarios
         UsuarioController usuarioController = new UsuarioController(viewConsole);
         EstudianteController estudianteController = new EstudianteController(viewConsole);
         ProfesorController profesorController = new ProfesorController(viewConsole);
-        ClaseController laseController = new ClaseController(viewConsole);
+        ClaseController claseController = new ClaseController(viewConsole);
         InscripcionController inscripcionController = new InscripcionController(viewConsole);
         mostrarMenu(scanner,inscripcionController, usuarioController, estudianteController, profesorController, claseController);
         // Cerrar el Scanner después de usarlo
@@ -29,8 +29,8 @@ public class Main {
             System.out.println("1. Menú estudiante");
             System.out.println("2. Menú profesor");
             System.out.println("3. Menú usuario");
-            System.out.println("3. Menú clase");
-            System.out.println("3. Menú inscripcion");
+            System.out.println("4. Menú clase");
+            System.out.println("5. Menú inscripcion");
             System.out.println("0. Salir");
             System.out.print("Ingrese el número de opción: ");
 
