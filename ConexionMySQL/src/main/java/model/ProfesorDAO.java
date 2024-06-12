@@ -18,6 +18,14 @@ public class ProfesorDAO {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, profesor.getId()); // Aquí deberías pasar el ID del estudiante
             stmt.setDouble(2, profesor.getSalario());
+    public ProfesorDAO (Connection connection){
+        this.connection = connection;
+    }
+
+    public void agregarProfesor( ProfesorModel objeto) throws SQLException {
+        String query = "INSERT INTO `profesor_AliEli`( `salario`) VALUES (?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)){
+            stmt.setDouble(1, objeto.getSalario());
             stmt.executeUpdate();
         }
     }
@@ -66,4 +74,5 @@ public class ProfesorDAO {
             stmt.executeUpdate();
         }
     }
+
 }

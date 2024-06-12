@@ -6,6 +6,8 @@ import view.ConsoleView;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import view.ConsoleView;
+
 public class ProfesorController {
 
     private ConsoleView viewConsole;
@@ -68,4 +70,6 @@ public class ProfesorController {
             viewConsole.errorMessage("Error al eliminar profesor: " + e.getMessage());
         }
     }
+
+
 }
