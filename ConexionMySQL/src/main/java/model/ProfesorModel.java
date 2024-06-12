@@ -11,12 +11,6 @@ public class ProfesorModel extends UsuarioModel{
     public ProfesorModel(int id, double salario) {
         super(id, "", "", "");
         this.salario = salario;
-
-    private double salario;
-
-    public ProfesorModel(String nombre, String identificacion, String correo) {
-        super(nombre, identificacion, correo);
-        this.salario= salario;
     }
 
     public double getSalario() {
@@ -35,7 +29,6 @@ public class ProfesorModel extends UsuarioModel{
                 ", identificacion='" + getIdentificacion() + '\'' +
                 ", correo='" + getCorreo() + '\'' +
                 ", salario=" + salario +
-                "salario='" + salario + '\'' +
                 '}';
     }
 }

@@ -19,9 +19,6 @@ public class ClaseController {
 
     public void agregarClase(int claseId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
         ClaseModel datos = new ClaseModel(claseId, profesorId, fechaClase, horaInicio, horaFin);
-        try {
-    public void agregarCurso(String nombre, int estado){
-        ClaseModel datos = new ClaseModel(nombre, estado);
 
         try
         {
