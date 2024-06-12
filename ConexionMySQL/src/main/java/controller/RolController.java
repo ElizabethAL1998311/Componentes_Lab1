@@ -46,7 +46,7 @@ public class RolController {
     public void editarRol(int rolId, String nombre, String descripcion) {
         RolModel rol = new RolModel(rolId, nombre, descripcion);
         try {
-            rolDAO.editarRol(rol);
+            rolDAO.editarRol(rolId, nombre, descripcion);
             viewConsole.showMessage("Rol actualizado correctamente.");
         } catch (SQLException e) {
             viewConsole.errorMessage("Error al actualizar rol: " + e.getMessage());

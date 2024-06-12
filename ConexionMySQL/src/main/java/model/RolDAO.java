@@ -40,12 +40,12 @@ public class RolDAO {
         return null;
     }
 
-    public void editarRol(RolModel rol) throws SQLException {
+    public void editarRol(int rolId, String nombre, String descripcion) throws SQLException {
         String query = "UPDATE rol_AliEli SET nombre = ?, descripcion = ? WHERE rol_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, rol.getNombre());
-            stmt.setString(2, rol.getDescripcion());
-            stmt.setInt(3, rol.getId());
+            stmt.setString(1, nombre);
+            stmt.setString(2, descripcion);
+            stmt.setInt(3, rolId);
             stmt.executeUpdate();
         }
     }
