@@ -17,12 +17,13 @@ public class Main {
         ProfesorController profesorController = new ProfesorController(viewConsole);
         ClaseController claseController = new ClaseController(viewConsole);
         InscripcionController inscripcionController = new InscripcionController(viewConsole);
-        mostrarMenu(scanner,inscripcionController, usuarioController, estudianteController, profesorController, claseController);
+        RolController rolController = new RolController(viewConsole);
+        mostrarMenu(scanner,inscripcionController, usuarioController, estudianteController, profesorController, claseController, rolController);
         // Cerrar el Scanner después de usarlo
         scanner.close();
     }
 
-    public static void mostrarMenu(Scanner scanner, InscripcionController inscripcionController, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
+    public static void mostrarMenu(Scanner scanner, InscripcionController inscripcionController, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController, RolController rolController) {
         boolean continuar = true;
         while (continuar) {
             System.out.println("_________MENU PRINCIPAL_________:");
@@ -31,6 +32,7 @@ public class Main {
             System.out.println("3. Menú usuario");
             System.out.println("4. Menú clase");
             System.out.println("5. Menú inscripcion");
+            System.out.println("6. Menú rol");
             System.out.println("0. Salir");
             System.out.print("Ingrese el número de opción: ");
 
@@ -52,6 +54,9 @@ public class Main {
                 case 5:
                     menuInscripciones(inscripcionController, scanner);
                     break;
+                case 6:
+                    menuRol(rolController, scanner);
+                    break;
                 case 0:
                     continuar = false;
                     break;
@@ -60,6 +65,72 @@ public class Main {
             }
         }
     }
+
+    public static void menuRol(RolController rolController, Scanner scanner) {
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("__________Menú de R O L:");
+            System.out.println("1. Agregar rol");
+            System.out.println("2. Leer rol");
+            System.out.println("3. Actualizar rol");
+            System.out.println("4. Eliminar rol");
+            System.out.println("0. De vuelta al menu principal");
+            System.out.print("Ingrese el número de opción: ");
+
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    agregarRol(rolController, scanner);
+                    break;
+                case 2:
+                    leerRol(rolController, scanner);
+                    break;
+                case 3:
+                    editarRol(rolController, scanner);
+                    break;
+                case 4:
+                    eliminarRol(rolController, scanner);
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+            }
+        }
+    }
+
+    private static void eliminarRol(RolController rolController, Scanner scanner) {
+        System.out.print("Ingrese el ID del rol a eliminar: ");
+        int rol_id = scanner.nextInt();
+        rolController.eliminarRol(rol_id);
+    }
+
+    private static void editarRol(RolController rolController, Scanner scanner) {
+        System.out.print("Ingrese el ID del rol a actualizar: ");
+        int id = scanner.nextInt();
+        System.out.print("Ingrese el nuevo nombre del rol: ");
+        String nombre = scanner.next();
+        System.out.print("Ingrese la nueva descripcion del rol: ");
+        String descripcion = scanner.next();
+        rolController.editarRol(id, nombre, descripcion);
+    }
+
+
+    private static void leerRol(RolController rolController, Scanner scanner) {
+        System.out.print("Ingrese el ID del rol: ");
+        int claseId = scanner.nextInt();
+        rolController.leerRol(claseId);
+    }
+
+    private static void agregarRol(RolController rolController, Scanner scanner) {
+        System.out.print("Ingrese el nombre del rol: ");
+        String nombre = scanner.next();
+        System.out.print("Ingrese la descripcion del rol: ");
+        String descripcion = scanner.next();
+        rolController.agregarRol(nombre, descripcion);
+    }
+
 
     public static void menuClase(ClaseController claseController, Scanner scanner) {
         boolean continuar = true;
@@ -316,7 +387,6 @@ public class Main {
                     break;
                 case 0:
                     continuar = false;
-                    mostrarMenu(scanner, inscripcionController, usuarioController, estudianteController, profesorController, ClaseController);
                     break;
                 default:
                     consoleView.showMessage("Opción no válida");

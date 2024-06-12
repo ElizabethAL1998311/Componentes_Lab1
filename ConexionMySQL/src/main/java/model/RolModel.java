@@ -5,10 +5,13 @@ public class RolModel {
     private String nombre;
     private String descripcion;
 
-    public RolModel(int id, String nombre, String descripcion) {
+    public RolModel(String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+    }
+
+    public RolModel(int rolId, String nombre, String descripcion) {
     }
 
     public int getId() {

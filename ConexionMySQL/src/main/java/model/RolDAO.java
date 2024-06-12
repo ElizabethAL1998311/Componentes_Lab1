@@ -1,9 +1,6 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class RolDAO {
     private Connection connection;
@@ -13,14 +10,20 @@ public class RolDAO {
     }
 
     public void agregarRol(RolModel rol) throws SQLException {
-        String query = "INSERT INTO rol_AliEli ( rol_id, nombre,descripcion) VALUES (?, ?,?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, rol.getId());
-            stmt.setString(2, rol.getNombre());
+        String query = "INSERT INTO rol_AliEli (nombre, descripcion) VALUES (?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, rol.getNombre());
             stmt.setString(2, rol.getDescripcion());
             stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                rol.setId(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("No se pudo obtener el ID del rol generado.");
+            }
         }
     }
+
 
     public RolModel obtenerRol(int rol_id) throws SQLException {
         String query = "SELECT * FROM `rol_AliEli` WHERE `rol_id` = ?";
@@ -30,22 +33,23 @@ public class RolDAO {
                 if (resultSet.next()) {
                     String nombre = resultSet.getString("nombre");
                     String descripcion = resultSet.getString("descripcion");
-                    return new RolModel(rol_id, nombre, descripcion);
+                    return new RolModel(nombre, descripcion);
                 }
             }
         }
         return null;
     }
 
-    public void editarRol(int rol_id, String nombre, String descripcion) throws SQLException {
-        String query = "UPDATE rol_AliEli SET nombre,descripcion = ? WHERE rol_id = ?";
+    public void editarRol(RolModel rol) throws SQLException {
+        String query = "UPDATE rol_AliEli SET nombre = ?, descripcion = ? WHERE rol_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, nombre);
-            stmt.setString(1, descripcion);
-            stmt.setInt(2, rol_id);
+            stmt.setString(1, rol.getNombre());
+            stmt.setString(2, rol.getDescripcion());
+            stmt.setInt(3, rol.getId());
             stmt.executeUpdate();
         }
     }
+
 
     public void eliminarRol(int  rol_id) throws SQLException {
         String query = "DELETE FROM rol_AliEli WHERE  rol_id = ?";

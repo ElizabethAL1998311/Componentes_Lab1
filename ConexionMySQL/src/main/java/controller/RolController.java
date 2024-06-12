@@ -19,16 +19,16 @@ public class RolController {
 
     }
 
-
-    public void agregarRol(int rolId, String nombre, String descripcion) {
-        RolModel rol = new RolModel(rolId, nombre, descripcion);
+    public void agregarRol(String nombre, String descripcion) {
+        RolModel rol = new RolModel(nombre, descripcion);
         try {
             rolDAO.agregarRol(rol);
-            viewConsole.showMessage("Inserción de rol correcta");
+            viewConsole.showMessage("Rol agregado correctamente con ID: " + rol.getId());
         } catch (SQLException e) {
             viewConsole.errorMessage("Error al insertar rol: " + e.getMessage());
         }
     }
+
 
     public void leerRol(int rolId) {
         try {
@@ -44,13 +44,15 @@ public class RolController {
     }
 
     public void editarRol(int rolId, String nombre, String descripcion) {
+        RolModel rol = new RolModel(rolId, nombre, descripcion);
         try {
-            rolDAO.editarRol(rolId, nombre, descripcion);
-            viewConsole.showMessage("Actualización de rol correcta");
+            rolDAO.editarRol(rol);
+            viewConsole.showMessage("Rol actualizado correctamente.");
         } catch (SQLException e) {
             viewConsole.errorMessage("Error al actualizar rol: " + e.getMessage());
         }
     }
+
 
     public void eliminarRol(int rolId) {
         try {
