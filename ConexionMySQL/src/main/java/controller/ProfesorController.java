@@ -6,20 +6,18 @@ import view.ConsoleView;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import view.ConsoleView;
-
 public class ProfesorController {
 
     private ConsoleView viewConsole;
 
     private ProfesorDAO profesorDAO;
-    private UsuarioDAO usuarioDAO;
+    private PersonaDAO usuarioDAO;
 
     public ProfesorController (ConsoleView viewConsole){
         this.viewConsole = viewConsole;
         Connection connection = conexion.getConnection();
         this.profesorDAO = new ProfesorDAO(connection);
-        this.usuarioDAO = new UsuarioDAO(connection);
+        this.usuarioDAO = new PersonaDAO(connection);
     }
 
     public void agregarProfesor(int id,Double salario){
@@ -46,8 +44,8 @@ public class ProfesorController {
             viewConsole.errorMessage("Error al leer usuario: " + e.getMessage());
         }
     }
-    public void editarProfesor(int profesor_id , String nombre, String identificacion, String correo, Double salario) {
-        UsuarioModel datosUsuario = new UsuarioModel(profesor_id , nombre, identificacion, correo);
+    public void editarProfesor(int profesor_id , String nombre, String identificacion, String correo,String apellido, String telefono, Double salario) {
+        PersonaModel datosUsuario = new PersonaModel(profesor_id , nombre, identificacion, correo, apellido,telefono);
         try {
             // Actualizar la información del usuario
             usuarioDAO.editarUsuario(datosUsuario);
@@ -70,6 +68,5 @@ public class ProfesorController {
             viewConsole.errorMessage("Error al eliminar profesor: " + e.getMessage());
         }
     }
-
 
 }

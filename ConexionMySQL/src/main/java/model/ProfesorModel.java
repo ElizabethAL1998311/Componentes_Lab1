@@ -1,15 +1,15 @@
 package model;
 
-public class ProfesorModel extends UsuarioModel{
+public class ProfesorModel extends PersonaModel {
     private  double salario;
 
-    public ProfesorModel(int id, String nombre, String identificacion, String correo, double salario) {
-        super(id, nombre, identificacion, correo);
+    public ProfesorModel(int id, String nombre, String apellido, String telefono, String identificacion, String correo, double salario) {
+        super(id, nombre, apellido, telefono, identificacion, correo);
         this.salario = salario;
     }
 
     public ProfesorModel(int id, double salario) {
-        super(id, "", "", "");
+        super(id, "", "", "","","");
         this.salario = salario;
     }
 

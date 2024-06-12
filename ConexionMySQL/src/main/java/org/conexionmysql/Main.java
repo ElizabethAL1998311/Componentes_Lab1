@@ -12,7 +12,7 @@ public class Main {
         ConsoleView viewConsole = new ConsoleView();
         Scanner scanner = new Scanner(System.in);
         // Crear instancias de los controladores necesarios
-        UsuarioController usuarioController = new UsuarioController(viewConsole);
+        PersonaController usuarioController = new PersonaController(viewConsole);
         EstudianteController estudianteController = new EstudianteController(viewConsole);
         ProfesorController profesorController = new ProfesorController(viewConsole);
         ClaseController claseController = new ClaseController(viewConsole);
@@ -22,7 +22,7 @@ public class Main {
         scanner.close();
     }
 
-    public static void mostrarMenu(Scanner scanner, InscripcionController inscripcionController, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
+    public static void mostrarMenu(Scanner scanner, InscripcionController inscripcionController, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
         boolean continuar = true;
         while (continuar) {
             System.out.println("_________MENU PRINCIPAL_________:");
@@ -215,7 +215,7 @@ public class Main {
         inscripcionController.agregarInscripcion(estudianteId, profesorId, claseId);
     }
 
-    public static void menuProfesor(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+    public static void menuProfesor(Scanner scanner, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
         ConsoleView consoleView = new ConsoleView();
         boolean continuar = true;
         while (continuar) {
@@ -251,7 +251,7 @@ public class Main {
         }
     }
 
-    public static void menuEstudiante(Scanner scanner, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
+    public static void menuEstudiante(Scanner scanner, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController) {
         ConsoleView consoleView = new ConsoleView();
         boolean continuar = true;
         while (continuar) {
@@ -287,7 +287,7 @@ public class Main {
         }
     }
 
-    public static void menuUsuario(Scanner scanner, InscripcionController inscripcionController, UsuarioController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
+    public static void menuUsuario(Scanner scanner, InscripcionController inscripcionController, PersonaController usuarioController, EstudianteController estudianteController, ProfesorController profesorController, ClaseController ClaseController) {
         ConsoleView consoleView = new ConsoleView();
         boolean continuar = true;
         while (continuar) {
@@ -324,14 +324,18 @@ public class Main {
         }
     }
 
-    public static void agregarUsuario(UsuarioController usuarioController, Scanner scanner) {
+    public static void agregarUsuario(PersonaController usuarioController, Scanner scanner) {
         System.out.print("Ingrese el nombre del usuario: ");
         String nombre = scanner.next();
+        System.out.print("Ingrese el apellido del usuario: ");
+        String apellido = scanner.next();
         System.out.print("Ingrese la identificación del usuario: ");
         String identificacion = scanner.next();
         System.out.print("Ingrese el correo del usuario: ");
         String correo = scanner.next();
-        usuarioController.agregarUsuario(nombre, identificacion, correo);
+        System.out.print("Ingrese el telefono: ");
+        String telefono = scanner.next();
+        usuarioController.agregarUsuario(nombre, identificacion, correo, apellido,telefono);
     }
 
     public static void agregarEstudiante(EstudianteController estudianteController, Scanner scanner) {
@@ -350,7 +354,7 @@ public class Main {
         profesorController.agregarProfesor(profesor_id, Double.valueOf(salario));
     }
 
-    public static void leerUsuario(UsuarioController usuarioController, Scanner scanner) {
+    public static void leerUsuario(PersonaController usuarioController, Scanner scanner) {
         System.out.print("Ingrese la identificación del usuario que desea leer: ");
         int usuario_id = Integer.parseInt(scanner.next());
         usuarioController.leerUsuario(usuario_id);
@@ -368,16 +372,20 @@ public class Main {
         profesorController.obtenerProfesor(profesor_id);
     }
 
-    public static void editarUsuario(UsuarioController usuarioController, Scanner scanner) {
+    public static void editarUsuario(PersonaController usuarioController, Scanner scanner) {
         System.out.print("Ingrese el ID del usuario que desea editar: ");
         int usuario_id = scanner.nextInt();
         System.out.print("Ingrese el nuevo nombre: ");
         String nombre = scanner.next();
+        System.out.print("Ingrese el nuevo apellido: ");
+        String apellido = scanner.next();
         System.out.print("Ingrese la nueva identificación: ");
         String identificacion = scanner.next();
         System.out.print("Ingrese el nuevo correo: ");
         String correo = scanner.next();
-        usuarioController.editarUsuario(usuario_id, nombre, identificacion, correo);
+        System.out.print("Ingrese el nuevo telefono: ");
+        String telefono = scanner.next();
+        usuarioController.editarUsuario(usuario_id, nombre, identificacion, correo,apellido,telefono);
     }
 
     public static void editarEstudiante(EstudianteController estudianteController, Scanner scanner) {
@@ -385,13 +393,17 @@ public class Main {
         int estudiante_id = scanner.nextInt();
         System.out.print("Ingrese el nuevo nombre: ");
         String nombre = scanner.next();
+        System.out.print("Ingrese el nuevo apellido: ");
+        String apellido = scanner.next();
         System.out.print("Ingrese la nueva identificación: ");
         String identificacion = scanner.next();
         System.out.print("Ingrese el nuevo correo: ");
         String correo = scanner.next();
         System.out.print("Ingrese el nuevo estado: ");
         String estado = scanner.next();
-        estudianteController.editarEstudiante(estudiante_id, nombre, identificacion, correo, estado);
+        System.out.print("Ingrese el nuevo telefono: ");
+        String telefono = scanner.next();
+        estudianteController.editarEstudiante(estudiante_id, nombre, identificacion, correo,apellido,telefono, estado);
     }
 
     public static void editarProfesor(ProfesorController profesorController, Scanner scanner) {
@@ -399,16 +411,20 @@ public class Main {
         int profesor_id  = scanner.nextInt();
         System.out.print("Ingrese el nuevo nombre: ");
         String nombre = scanner.next();
+        System.out.print("Ingrese el nuevo apellido: ");
+        String apellido = scanner.next();
         System.out.print("Ingrese la nueva identificación: ");
         String identificacion = scanner.next();
         System.out.print("Ingrese el nuevo correo: ");
         String correo = scanner.next();
         System.out.print("Ingrese el nuevo salario: ");
         Double salario = Double.valueOf(scanner.next());
-        profesorController.editarProfesor(profesor_id, nombre, identificacion, correo, salario);
+        System.out.print("Ingrese el nuevo telefono: ");
+        String telefono = scanner.next();
+        profesorController.editarProfesor(profesor_id, nombre, identificacion, correo,apellido,telefono, salario);
     }
 
-    public static void eliminarUsuario(UsuarioController usuarioController, Scanner scanner) {
+    public static void eliminarUsuario(PersonaController usuarioController, Scanner scanner) {
         System.out.print("Ingrese el ID del usuario a eliminar: ");
         int usuario_id = scanner.nextInt();
         usuarioController.eliminarUsuario(usuario_id);

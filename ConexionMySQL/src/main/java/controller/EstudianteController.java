@@ -11,13 +11,13 @@ public class EstudianteController {
     private ConsoleView viewConsole;
 
     private EstudianteDAO estudianteDAO;
-    private UsuarioDAO usuarioDAO;
+    private PersonaDAO usuarioDAO;
 
     public EstudianteController (ConsoleView viewConsole){
         this.viewConsole = viewConsole;
         Connection connection = conexion.getConnection();
         this.estudianteDAO = new EstudianteDAO(connection);
-        this.usuarioDAO = new UsuarioDAO(connection);
+        this.usuarioDAO = new PersonaDAO(connection);
     }
 
     public void agregarEstudiante(int id,String estado){
@@ -45,8 +45,8 @@ public class EstudianteController {
         }
     }
 
-    public void editarEstudiante(int estudiante_id, String nombre, String identificacion, String correo, String estado) {
-        UsuarioModel datosUsuario = new UsuarioModel(estudiante_id, nombre, identificacion, correo);
+    public void editarEstudiante(int estudiante_id, String nombre, String identificacion, String correo,String apellido, String telefono, String estado) {
+        PersonaModel datosUsuario = new PersonaModel(estudiante_id, nombre, identificacion, correo,apellido,telefono);
         try {
             // Actualizar la información del usuario
             usuarioDAO.editarUsuario(datosUsuario);

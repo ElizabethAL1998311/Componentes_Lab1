@@ -23,9 +23,9 @@ public class ProfesorDAO {
     }
 
     public ProfesorModel obtenerProfesor(int profesorId) throws SQLException {
-        String query = "SELECT p.profesor_id, p.salario, u.usuario_id, u.nombre, u.identificacion, u.correo " +
+        String query = "SELECT p.profesor_id, p.salario, u.usuario_id, u.nombre, u.identificacion, u.correo,u.apellido,u.telefono " +
                 "FROM profesor_AliEli p " +
-                "JOIN usuario_AliEli u ON p.profesor_id = u.usuario_id " +
+                "JOIN persona_AliEli u ON p.profesor_id = u.usuario_id " +
                 "WHERE p.profesor_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, profesorId);
@@ -36,7 +36,9 @@ public class ProfesorDAO {
                     String identificacion = resultSet.getString("identificacion");
                     String correo = resultSet.getString("correo");
                     double salario = resultSet.getDouble("salario");
-                    return new ProfesorModel(usuarioId, nombre, identificacion, correo, salario);
+                    String apellido = resultSet.getString("apellido");
+                    String telefono = resultSet.getString("telefono");
+                    return new ProfesorModel(usuarioId, nombre, identificacion, correo,apellido,telefono,salario);
                 }
             }
         }

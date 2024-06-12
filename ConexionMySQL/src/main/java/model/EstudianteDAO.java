@@ -21,7 +21,7 @@ public class EstudianteDAO {
     }
 
     public EstudianteModel obtenerEstudiante(int estudianteId) throws SQLException {
-        String query = "SELECT e.estudiante_id, e.estado, u.usuario_id, u.nombre, u.identificacion, u.correo " +
+        String query = "SELECT e.estudiante_id, e.estado, u.usuario_id, u.nombre, u.identificacion, u.apellido,u.telefono " +
                 "FROM estudiante_AliEli e " +
                 "JOIN usuario_AliEli u ON e.estudiante_id = u.usuario_id " +
                 "WHERE e.estudiante_id = ?";
@@ -34,7 +34,9 @@ public class EstudianteDAO {
                     String identificacion = resultSet.getString("identificacion");
                     String correo = resultSet.getString("correo");
                     String estado = resultSet.getString("estado");
-                    return new EstudianteModel(usuarioId, nombre, identificacion, correo, estado);
+                    String apellido = resultSet.getString("apellido");
+                    String telefono = resultSet.getString("telefono");
+                    return new EstudianteModel(usuarioId, nombre, identificacion, correo,apellido,telefono, estado);
                 }
             }
         }
