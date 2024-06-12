@@ -172,14 +172,18 @@ public class Main {
     }
 
     private static void editarInscripcion(InscripcionController inscripcionController, Scanner scanner) {
-        System.out.print("Ingrese el ID de la inscripción: ");
+        System.out.print("Ingrese el ID de la inscripcion: ");
         int id = scanner.nextInt();
-        System.out.print("Ingrese el nuevo ID del estudiante: ");
+        System.out.print("Ingrese el ID del estudiante: ");
         int estudianteId = scanner.nextInt();
-        System.out.print("Ingrese el nuevo ID del profesor: ");
+        System.out.print("Ingrese el ID del profesor: ");
         int profesorId = scanner.nextInt();
-        System.out.print("Ingrese el nuevo ID de la clase: ");
+        System.out.print("Ingrese el ID de la clase: ");
         int claseId = scanner.nextInt();
+        System.out.print("Ingrese la fecha de la inscripcion: ");
+        Date inscripcionDate = Date.valueOf(scanner.next());
+        System.out.print("Ingrese el precio de la inscripcion: ");
+        Double inscripcionPrice = scanner.nextDouble();
         inscripcionController.editarInscripcion(id, estudianteId, profesorId, claseId);
     }
 
@@ -196,12 +200,18 @@ public class Main {
     }
 
     private static void agregarInscripcion(InscripcionController inscripcionController, Scanner scanner) {
+        System.out.print("Ingrese el ID de la inscripcion: ");
+        int id = scanner.nextInt();
         System.out.print("Ingrese el ID del estudiante: ");
         int estudianteId = scanner.nextInt();
         System.out.print("Ingrese el ID del profesor: ");
         int profesorId = scanner.nextInt();
         System.out.print("Ingrese el ID de la clase: ");
         int claseId = scanner.nextInt();
+        System.out.print("Ingrese la fecha de la inscripcion: ");
+        Date inscripcionDate = Date.valueOf(scanner.next());
+        System.out.print("Ingrese el precio de la inscripcion: ");
+        Double inscripcionPrice = scanner.nextDouble();
         inscripcionController.agregarInscripcion(estudianteId, profesorId, claseId);
     }
 
