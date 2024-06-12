@@ -11,19 +11,18 @@ public class ClaseController {
     private ConsoleView viewConsole;
     private ClaseDAO claseDAO;
 
-    public ClaseController (ConsoleView viewConsole){
+    public ClaseController(ConsoleView viewConsole) {
         this.viewConsole = viewConsole;
         Connection connection = conexion.getConnection();
         this.claseDAO = new ClaseDAO(connection);
     }
 
-    public void agregarClase(int claseId, int cursoId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin){
-        ClaseModel datos = new ClaseModel(claseId, claseId,  cursoId, fechaClase,  horaInicio,  horaFin);
-        try
-        {
+    public void agregarClase(int claseId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
+        ClaseModel datos = new ClaseModel(claseId, profesorId, fechaClase, horaInicio, horaFin);
+        try {
             claseDAO.agregarClase(datos);
-            viewConsole.showMessage("Insercion de datos correcta");
-        }catch (SQLException e){
+            viewConsole.showMessage("Inserción de datos correcta");
+        } catch (SQLException e) {
             viewConsole.errorMessage("Error al insertar datos: " + e.getMessage());
         }
     }
@@ -41,10 +40,10 @@ public class ClaseController {
         }
     }
 
-    public void editarClase(int claseId, int cursoId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
-        ClaseModel datos = new ClaseModel(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+    public void editarClase(int claseId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
+        ClaseModel datos = new ClaseModel(claseId, profesorId, fechaClase, horaInicio, horaFin);
         try {
-            claseDAO.editarClase(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+            claseDAO.editarClase(claseId, profesorId, fechaClase, horaInicio, horaFin);
             viewConsole.showMessage("Actualización de datos correcta");
         } catch (SQLException e) {
             viewConsole.errorMessage("Error al actualizar datos: " + e.getMessage());
@@ -59,7 +58,4 @@ public class ClaseController {
             viewConsole.errorMessage("Error al eliminar datos: " + e.getMessage());
         }
     }
-
-
-
 }

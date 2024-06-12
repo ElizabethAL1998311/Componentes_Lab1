@@ -6,20 +6,17 @@ import java.util.Date;
 public class ClaseModel {
     private int id;
     private int profesorId;
-    private int cursoId;
     private Date fechaClase;
     private Time horaInicio;
     private Time horaFin;
 
-    public ClaseModel(int id, int cursoId, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
+    public ClaseModel(int id, int profesorId, Date fechaClase, Time horaInicio, Time horaFin) {
         this.id = id;
-        this.cursoId = cursoId;
         this.profesorId = profesorId;
         this.fechaClase = fechaClase;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
-
 
     public int getId() {
         return id;
@@ -59,13 +56,5 @@ public class ClaseModel {
 
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
-    }
-
-    public int getCursoId() {
-        return cursoId;
-    }
-
-    public void setCursoId(int cursoId) {
-        this.cursoId = cursoId;
     }
 }

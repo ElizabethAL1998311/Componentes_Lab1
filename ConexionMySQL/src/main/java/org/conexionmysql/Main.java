@@ -98,8 +98,6 @@ public class Main {
     private static void agregarClase(ClaseController claseController, Scanner scanner) {
         System.out.print("Ingrese el ID de la clase: ");
         int claseId = scanner.nextInt();
-        System.out.print("Ingrese el ID del curso: ");
-        int cursoId = scanner.nextInt();
         System.out.print("Ingrese el ID del profesor: ");
         int profesorId = scanner.nextInt();
         System.out.print("Ingrese la fecha de la clase (yyyy-mm-dd): ");
@@ -108,7 +106,7 @@ public class Main {
         Time horaInicio = Time.valueOf(scanner.next());
         System.out.print("Ingrese la hora de fin (hh:mm:ss): ");
         Time horaFin = Time.valueOf(scanner.next());
-        claseController.agregarClase(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+        claseController.agregarClase(claseId, profesorId, fechaClase, horaInicio, horaFin);
     }
 
     private static void leerClase(ClaseController claseController, Scanner scanner) {
@@ -120,8 +118,6 @@ public class Main {
     private static void editarClase(ClaseController claseController, Scanner scanner) {
         System.out.print("Ingrese el ID de la clase a editar: ");
         int claseId = scanner.nextInt();
-        System.out.print("Ingrese el nuevo ID del curso: ");
-        int cursoId = scanner.nextInt();
         System.out.print("Ingrese el nuevo ID del profesor: ");
         int profesorId = scanner.nextInt();
         System.out.print("Ingrese la nueva fecha de la clase (yyyy-mm-dd): ");
@@ -130,7 +126,7 @@ public class Main {
         Time horaInicio = Time.valueOf(scanner.next());
         System.out.print("Ingrese la nueva hora de fin (hh:mm:ss): ");
         Time horaFin = Time.valueOf(scanner.next());
-        claseController.editarClase(claseId, cursoId, profesorId, fechaClase, horaInicio, horaFin);
+        claseController.editarClase(claseId, profesorId, fechaClase, horaInicio, horaFin);
     }
 
     private static void eliminarClase(ClaseController claseController, Scanner scanner) {

@@ -1,22 +1,19 @@
 package model;
 
+import java.sql.Date;
+
 public class InscripcionModel {
+
     private int id;
     private int estudianteId;
     private int profesorId;
     private int claseId;
-
-    public InscripcionModel(int id, int estudianteId, int profesorId, int claseId) {
-        this.id = id;
-        this.estudianteId = estudianteId;
-        this.profesorId = profesorId;
-        this.claseId = claseId;
+    private Date inscripcionDate;
+    private double inscripcionPrice;
+    public InscripcionModel(int estudianteId, int profesorId, int claseId) {
     }
 
-    public InscripcionModel(int estudianteId, int profesorId, int claseId) {
-        this.estudianteId = estudianteId;
-        this.profesorId = profesorId;
-        this.claseId = claseId;
+    public InscripcionModel(int id, int estudianteId, Date inscripcionDate, double inscripcionPrice) {
     }
 
     public int getId() {
@@ -51,13 +48,19 @@ public class InscripcionModel {
         this.claseId = claseId;
     }
 
-    @Override
-    public String toString() {
-        return "InscripcionModel{" +
-                "id=" + id +
-                ", estudianteId=" + estudianteId +
-                ", profesorId=" + profesorId +
-                ", claseId=" + claseId +
-                '}';
+    public Date getInscripcionDate() {
+        return inscripcionDate;
+    }
+
+    public void setInscripcionDate(Date inscripcionDate) {
+        this.inscripcionDate = inscripcionDate;
+    }
+
+    public double getInscripcionPrice() {
+        return inscripcionPrice;
+    }
+
+    public void setInscripcionPrice(double inscripcionPrice) {
+        this.inscripcionPrice = inscripcionPrice;
     }
 }
