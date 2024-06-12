@@ -35,4 +35,24 @@ public class UsuarioDAO {
         }
         return null;
     }
+
+    public void editarUsuario(UsuarioModel usuario) throws SQLException {
+        String query = "UPDATE usuario_AliEli SET nombre = ?, identificacion = ?, correo = ? WHERE usuario_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getIdentificacion());
+            stmt.setString(3, usuario.getCorreo());
+            stmt.setInt(4, usuario.getId());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void eliminarUsuario(int usuario_id) throws SQLException {
+        String query = "DELETE FROM usuario_AliEli WHERE usuario_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, usuario_id);
+            stmt.executeUpdate();
+        }
+    }
+
 }

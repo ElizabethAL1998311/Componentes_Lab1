@@ -38,12 +38,41 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Eli/Desktop/gitHub/Componentes_Lab1/ConexionMySQL",
     "last_opened_file_path": "/Users/alisontalbot/Documents/GitHub/Componentes_Lab1_Eli",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
+  }}]]>
+
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Componentes_Lab1_Eli" />
+
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Componentes_Lab1" />
+
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+
+      <module name="Componentes_Lab1_Eli" />
+
+      <module name="Componentes_Lab1" />
+
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -56,6 +85,11 @@
       <updated>1717621876938</updated>
       <workItem from="1717621878065" duration="890000" />
       <workItem from="1717625134262" duration="1669000" />
+
+      <workItem from="1717804132074" duration="55000" />
+
+      <workItem from="1717803468689" duration="22000" />
+
       <workItem from="1717678510017" duration="477000" />
       <workItem from="1717679086201" duration="87000" />
     </task>

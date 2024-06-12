@@ -1,6 +1,16 @@
 package model;
 
 public class ProfesorModel extends UsuarioModel{
+    private  double salario;
+
+    public ProfesorModel(int id, String nombre, String identificacion, String correo, double salario) {
+        super(id, nombre, identificacion, correo);
+        this.salario = salario;
+    }
+
+    public ProfesorModel(int id, double salario) {
+        super(id, "", "", "");
+        this.salario = salario;
 
     private double salario;
 
@@ -20,6 +30,11 @@ public class ProfesorModel extends UsuarioModel{
     @Override
     public String toString() {
         return "ProfesorModel{" +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", identificacion='" + getIdentificacion() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
+                ", salario=" + salario +
                 "salario='" + salario + '\'' +
                 '}';
     }

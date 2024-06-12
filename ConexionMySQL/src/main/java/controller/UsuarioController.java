@@ -11,12 +11,17 @@ public class UsuarioController {
     private ConsoleView viewConsole;
 
     private UsuarioDAO usuarioDAO;
+    private ProfesorDAO profesorDAO;
+    private EstudianteDAO estudianteDAO;
 
     public UsuarioController (ConsoleView viewConsole){
         this.viewConsole = viewConsole;
         Connection connection = conexion.getConnection();
         this.usuarioDAO = new UsuarioDAO(connection);
+        this.profesorDAO = new ProfesorDAO(connection);
+        this.estudianteDAO = new EstudianteDAO(connection);
     }
+
 
     public void agregarUsuario(String nombre, String identificacion, String correo){
         UsuarioModel datos = new UsuarioModel(nombre,identificacion,correo);
@@ -43,29 +48,44 @@ public class UsuarioController {
         }
     }
 
-   /* public void actualizarUsuario(String identificacion, String nuevoNombre, String nuevoCorreo) {
+    public void editarUsuario(int usuario_id, String nombre, String identificacion, String correo) {
+        UsuarioModel datos = new UsuarioModel(usuario_id, nombre, identificacion, correo);
         try {
-            int filasActualizadas = usuarioDAO.actualizarUsuario(identificacion, nuevoNombre, nuevoCorreo);
-            if (filasActualizadas > 0) {
-                viewConsole.showMessage("Usuario actualizado correctamente.");
-            } else {
-                viewConsole.showMessage("No se encontró ningún usuario para actualizar.");
-            }
+            usuarioDAO.editarUsuario(datos);
+            viewConsole.showMessage("Actualización de datos correcta");
         } catch (SQLException e) {
-            viewConsole.errorMessage("Error al actualizar usuario: " + e.getMessage());
+            viewConsole.errorMessage("Error al actualizar datos: " + e.getMessage());
         }
     }
 
-    public void eliminarUsuario(String identificacion) {
+    /*public void eliminarUsuario(int usuario_id) {
         try {
-            int filasEliminadas = usuarioDAO.eliminarUsuario(identificacion);
-            if (filasEliminadas > 0) {
-                viewConsole.showMessage("Usuario eliminado correctamente.");
-            } else {
-                viewConsole.showMessage("No se encontró ningún usuario para eliminar.");
-            }
+            // Antes de eliminar al usuario, eliminamos al profesor correspondiente (si existe)
+            profesorDAO.eliminarProfesorPorUsuario(usuario_id);
+
+            // Luego, eliminamos al usuario
+            usuarioDAO.eliminarUsuario(usuario_id);
+
+            viewConsole.showMessage("Usuario eliminado correctamente");
         } catch (SQLException e) {
             viewConsole.errorMessage("Error al eliminar usuario: " + e.getMessage());
         }
     }*/
+    public void eliminarUsuario(int usuario_id) {
+        try {
+            // Antes de eliminar al usuario, eliminamos al profesor correspondiente (si existe)
+            profesorDAO.eliminarProfesorPorUsuario(usuario_id);
+
+            // Antes de eliminar al usuario, eliminamos al estudiante correspondiente (si existe)
+            estudianteDAO.eliminarEstudiantePorUsuario(usuario_id);
+
+            // Luego, eliminamos al usuario
+            usuarioDAO.eliminarUsuario(usuario_id);
+
+            viewConsole.showMessage("Usuario eliminado correctamente");
+        } catch (SQLException e) {
+            viewConsole.errorMessage("Error al eliminar usuario: " + e.getMessage());
+        }
+    }
+
 }

@@ -26,7 +26,12 @@ public class EstudianteModel extends UsuarioModel{
     @Override
     public String toString() {
         return "EstudianteModel{" +
-                "estado='" + estado + '\'' +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", identificacion='" + getIdentificacion() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
+                ", estado=" + estado +
                 '}';
     }
+
 }
